@@ -6,37 +6,56 @@
 * @since   2021-11-19
 */
 
-
+import java.util.Scanner;
 
 /**
-* Reverse a string.
+* This is the calculating heating time program.
 */
-class Reverse {
-   
-    /**                                                                             
-    * Reverse a string.                                                             
-    */ 
-    void reverseString(String string) {
-        if (string == null) || (string.length() <= 1) {
-             System.out.println(string);
-        }
-        else {
-             System.out.print(string.charAt(string.length() - 1));
-              reverseString(string.substring(0, string.length() - 1));
-          }
-  }
+final class Reverse {
+    /**
+    * Prevent instantiation.
+    * Throw an exception IllegalStateException.
+    * if this ever is called
+    *
+    * @throws IllegalStateException
+    *
+    *
+    */
+    private Reverse() {
+        throw new IllegalStateException("Cannot be instantiated");
+    }
 
-      /**
-      * The Einstein program uses his famous equation to find the
-      * energy of an inputted then determine how many kiloton bombs
-      * its equivalent to.
-      *
-      * @param args
-      *
-      */                                    
-      public static void main(String[] args) {
-            String str = "java";                                                    
-            final Reverse rs = new Reverse();
-            rs.reverseString(str);
-         }
- }
+    /**
+    * The starting boardCalculator() function.
+    *
+    * @param stringArray is any string
+    *
+    * @return reversed array
+    */
+    public static String reverseString(final String stringArray) {
+        final String returnValue;
+        if (stringArray.length() == 0) {
+            returnValue = stringArray;
+        } else {
+            returnValue = reverseString(stringArray.substring(1))
+                + stringArray.charAt(0);
+        }
+        return returnValue;
+    }
+
+    /**
+    * The starting main() function.
+    *
+    * @param args No args will be used
+    */
+    public static void main(final String[] args) {
+        final Scanner scanner = new Scanner(System.in);
+        System.out.println("Input a text to reverse: ");
+        final String input = scanner.nextLine();
+
+        final String reversedString = reverseString(input);
+        System.out.println("The reverse of " + input + " is " + reversedString);
+
+        System.out.println("\nDone.");
+    }
+}
